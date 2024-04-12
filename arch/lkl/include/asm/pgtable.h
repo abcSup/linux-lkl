@@ -1,10 +1,11 @@
-#ifndef _LKL_PGTABLE_H
-#define _LKL_PGTABLE_H
+#ifndef _ASM_LKL_PGTABLE_H
+#define _ASM_LKL_PGTABLE_H
 
 /*
  * (C) Copyright 2000-2002, Greg Ungerer <gerg@snapgear.com>
  */
 
+#ifndef CONFIG_MMU
 #include <asm/page.h>
 #include <asm-generic/pgtable-nopud.h>
 #include <asm/processor.h>
@@ -51,5 +52,9 @@ extern void *empty_zero_page;
 
 #define PTRS_PER_PTE 0
 #define PTRS_PER_PMD 0
+#else /* CONFIG_MMU */
+#include <asm/page.h>
+#include <asm/pgtable-2level.h>
+#endif /* CONFIG_MMU */
 
-#endif
+#endif /* _ASM_LKL_PGTABLE_H */

@@ -40,9 +40,19 @@ struct thread_struct { };
 
 #define task_pt_regs(tsk) (struct pt_regs *)(NULL)
 
+#ifndef CONFIG_MMU
 /* We don't have strict user/kernel spaces */
 #define TASK_SIZE ((unsigned long)-1)
 #define TASK_UNMAPPED_BASE	0
+#else /* CONFIG_MMU */
+#define TASK_SIZE ((unsigned long)-1)
+#define TASK_UNMAPPED_BASE	0
+
+#define STACK_TOP	(TASK_SIZE)
+#define STACK_TOP_MAX	STACK_TOP
+static inline void start_thread(struct pt_regs *regs, unsigned long entry,
+			 unsigned long stack) {}
+#endif /* CONFIG_MMU */
 
 #define KSTK_EIP(tsk)	(0)
 #define KSTK_ESP(tsk)	(0)
