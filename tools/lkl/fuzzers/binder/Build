@@ -1,0 +1,3 @@
+binder-fuzzer-y += binder-fuzzer.o
+binder-fuzzer-y += binder.o
+CFLAGS_binder-fuzzer.o += -O0

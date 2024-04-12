@@ -133,6 +133,7 @@ find_headers("arch/lkl/include/uapi/asm/syscalls.h")
 headers.add("arch/lkl/include/uapi/asm/host_ops.h")
 find_headers("include/uapi/linux/uhid.h")
 find_headers("include/uapi/linux/input-event-codes.h")
+find_headers("include/uapi/linux/android/binder.h")
 
 if 'LKL_INSTALL_ADDITIONAL_HEADERS' in os.environ:
     with open(os.environ['LKL_INSTALL_ADDITIONAL_HEADERS'], 'rU') as f:
@@ -179,7 +180,7 @@ find_symbols(p, defines)
 p = re.compile("static\s+__always_inline(\s+\w+)+\s+(\w+)\([^)]*\)\s")
 find_symbols(p, defines)
 p = re.compile("enum\s+(\w*)\s*{([^}]*)}", re.M|re.S)
-q = re.compile("(\w+)\s*(,|=[^,]*|$)", re.M|re.S)
+q = re.compile("([a-zA-Z_]\w*)\s*(,|=[^,]*|$)", re.M|re.S)
 find_enums(p, q, defines)
 
 # needed for i386
